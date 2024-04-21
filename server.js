@@ -17,7 +17,8 @@ const server = http.createServer((req, res) => {
             res.write(JSON.stringify(data.users))
             res.end()
         })
-    } else if (req.method === 'GET' && req.url === '/api/books') {
+    }
+    else if (req.method === 'GET' && req.url === '/api/books') {
         fs.readFile('db.json', (err, db) => {
             if (err) {
                 throw err
@@ -27,9 +28,16 @@ const server = http.createServer((req, res) => {
             res.write(JSON.stringify(data.books))
             res.end()
         })
-    } else if (req.method === 'DELETE') {
+    }
+    else if (req.method === 'DELETE') {
         const parsedUrl = url.parse(req.url, true)
         const bookId = parsedUrl.query.id
+        console.log(db.books.length)
+        // if (db.books.length <=0) {
+        //     res.writeHead(404, {'content-type': 'application/json'})
+        //     res.write(JSON.stringify({message: "No Book Here"}))
+        //     res.end()
+        // }
         const newBooks = db.books.filter(book => book.id != bookId)
         fs.writeFile('db.json', JSON.stringify({...db, books: newBooks}), (err) => {
             if (err) {
@@ -39,7 +47,6 @@ const server = http.createServer((req, res) => {
             res.write(JSON.stringify({message: "Book Removed Successfully"}))
             res.end()
         })
-        res.end()
     }
 })
 
