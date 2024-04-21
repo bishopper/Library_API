@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Amin Saeedi",
+      "username": "01010101",
+      "crime": 0,
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "name": "Qadir Yolme",
+      "username": "Q_Yolme",
+      "crime": 0,
+      "role": "ADMIN"
+    },
+    {
+      "id": 3,
+      "name": "Ehsan Mmdi",
+      "username": "ehs",
+      "crime": 0,
+      "role": "USER"
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "Golestan",
+      "author": "Sadi",
+      "price": 230000,
+      "free": 0
+    },
+    {
+      "id": 2,
+      "title": "Boostan",
+      "author": "Sadi",
+      "price": 400000,
+      "free": 1
+    }
+  ]
+}
