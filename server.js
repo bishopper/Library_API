@@ -73,6 +73,30 @@ const server = http.createServer((req, res) => {
         })
     }
     // PUT - books
+    else if (req.method === 'PUT' && req.url.startsWith("/api/books")) {
+        const parsedUrl = url.parse(req.url, true)
+        const bookId = parsedUrl.query.id
+        let bookNewInfo = ""
+        req.on('data', (data) => {
+            bookNewInfo = bookNewInfo + data.toString()
+        })
+        req.on('end', () => {
+            const reqBody = JSON.parse(bookNewInfo)
+            db.books.forEach(book => {
+                if (book.id === Number(bookId)) {
+                    book.title = reqBody.title
+                    book.author = reqBody.author
+                    book.price = reqBody.price
+                }
+            })
+            fs.writeFile('./db.json', JSON.stringify(db), (err) => {
+                if (err) throw err
+                res.writeHead(200, {'content-type': 'application/json'})
+                res.write(JSON.stringify({message: "Book Updated Successfully"}))
+                res.end()
+            })
+        })
+    }
 })
 
 
